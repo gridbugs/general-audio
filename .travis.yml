@@ -9,6 +9,7 @@ jobs:
     - rust: nightly
   fast_finish: true
 before_script:
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get install libasound2-dev; fi
   - nvm install v12
   - nvm use v12
   - cargo install wasm-bindgen-cli
