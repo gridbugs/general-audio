@@ -1,0 +1,17 @@
+language: rust
+cache: cargo
+rust:
+  - stable
+  - beta
+  - nightly
+jobs:
+  allow_failures:
+    - rust: nightly
+  fast_finish: true
+before_script:
+  - nvm install v12
+  - nvm use v12
+  - cargo install wasm-bindgen-cli
+  - rustup target add wasm32-unknown-unknown
+script:
+  - ./test.sh

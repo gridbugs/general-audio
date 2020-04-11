@@ -1,0 +1,7 @@
+[workspace]
+
+members = [
+    "audio",
+    "native",
+    "web",
+]
