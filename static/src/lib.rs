@@ -1,15 +1,17 @@
 pub use general_audio::*;
 
-#[cfg(all(feature = "general_audio_native", feature = "general_audio_web"))]
-compile_error!("Choose exactly one out of: general_audio_native, general_audio_web");
-
-#[cfg(not(any(feature = "general_audio_native", feature = "general_audio_web")))]
+#[cfg(any(
+    not(any(feature = "general_audio_native", feature = "general_audio_web")),
+    all(feature = "general_audio_native", feature = "general_audio_web"),
+))]
 mod implementation {
     use super::*;
     pub mod backend {}
     pub struct StaticAudioPlayer(());
     pub struct StaticHandle(());
     pub struct StaticSound(());
+
+    const WARNING: &str = "using null implementation of StaticAudioPlayer";
 
     impl StaticHandle {
         pub fn set_volume(&self, _volume: f32) {}
@@ -58,7 +60,7 @@ mod implementation {
     }
 }
 
-#[cfg(feature = "general_audio_native")]
+#[cfg(all(feature = "general_audio_native", not(feature = "general_audio_web")))]
 mod implementation {
     use super::*;
     use backend::{NativeAudioPlayer, NativeHandle, NativeSound};
@@ -133,7 +135,7 @@ mod implementation {
     }
 }
 
-#[cfg(feature = "general_audio_web")]
+#[cfg(all(feature = "general_audio_web", not(feature = "general_audio_native")))]
 mod implementation {
     use super::*;
     use backend::{WebAudioPlayer, WebHandle, WebSound};
