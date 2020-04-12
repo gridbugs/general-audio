@@ -6,6 +6,7 @@ compile_error!("Choose exactly one out of: general_audio_native, general_audio_w
 #[cfg(not(any(feature = "general_audio_native", feature = "general_audio_web")))]
 mod backend {
     use super::*;
+    pub mod backend {}
     pub struct StaticAudioPlayer(());
     pub struct StaticHandle(());
     pub struct StaticSound(());
@@ -60,7 +61,8 @@ mod backend {
 #[cfg(feature = "general_audio_native")]
 mod backend {
     use super::*;
-    use general_audio_native::{NativeAudioPlayer, NativeHandle, NativeSound};
+    use backend::{NativeAudioPlayer, NativeHandle, NativeSound};
+    pub use general_audio_native as backend;
     pub struct StaticAudioPlayer(NativeAudioPlayer);
     pub struct StaticHandle(NativeHandle);
     pub struct StaticSound(NativeSound);
@@ -134,7 +136,8 @@ mod backend {
 #[cfg(feature = "general_audio_web")]
 mod backend {
     use super::*;
-    use general_audio_web::{WebAudioPlayer, WebHandle, WebSound};
+    use backend::{WebAudioPlayer, WebHandle, WebSound};
+    pub use general_audio_web as backend;
     pub struct StaticAudioPlayer(WebAudioPlayer);
     pub struct StaticHandle(WebHandle);
     pub struct StaticSound(WebSound);
