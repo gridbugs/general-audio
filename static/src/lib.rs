@@ -6,12 +6,18 @@ pub use general_audio::*;
 ))]
 mod implementation {
     use super::*;
-    pub mod backend {}
     pub struct StaticAudioPlayer(());
     pub struct StaticHandle(());
     pub struct StaticSound(());
 
     const WARNING: &str = "using null implementation of StaticAudioPlayer";
+
+    pub mod backend {
+        #[cfg(all(feature = "general_audio_native", feature = "general_audio_web"))]
+        pub use general_audio_native::*;
+        #[cfg(all(feature = "general_audio_native", feature = "general_audio_web"))]
+        pub use general_audio_web::*;
+    }
 
     impl StaticHandle {
         pub fn set_volume(&self, _volume: f32) {}
@@ -34,6 +40,9 @@ mod implementation {
     }
 
     impl StaticAudioPlayer {
+        pub fn new<A>(_: A) -> Self {
+            Self(())
+        }
         pub fn play(&self, _sound: &StaticSound) -> StaticHandle {
             StaticHandle(())
         }
