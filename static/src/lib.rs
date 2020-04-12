@@ -102,6 +102,9 @@ mod backend {
     }
 
     impl StaticAudioPlayer {
+        pub fn new(inner: NativeAudioPlayer) -> Self {
+            Self(inner)
+        }
         pub fn play(&self, sound: &StaticSound) -> StaticHandle {
             StaticHandle(self.0.play(&sound.0))
         }
@@ -173,6 +176,9 @@ mod backend {
     }
 
     impl StaticAudioPlayer {
+        pub fn new(inner: WebAudioPlayer) -> Self {
+            Self(inner)
+        }
         pub fn play(&self, sound: &StaticSound) -> StaticHandle {
             StaticHandle(AudioPlayer::play(&self.0, &sound.0))
         }
