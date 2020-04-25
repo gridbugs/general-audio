@@ -12,8 +12,12 @@ edition = "2018"
 
 [features]
 force_dedicated_audio_thread = []
+flac = ["rodio/flac"]
+vorbis = ["rodio/vorbis"]
+wav = ["rodio/wav"]
+mp3 = ["rodio/mp3"]
 
 [dependencies]
 log = "0.4"
-rodio = "0.11"
+rodio = { version = "0.11", default-features = false }
 general_audio = { path = "../audio", version = "0.1" }

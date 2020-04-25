@@ -12,6 +12,10 @@ edition = "2018"
 
 [features]
 native = ["general_audio_native"]
+native_flac = ["general_audio_native/flac"]
+native_vorbis = ["general_audio_native/vorbis"]
+native_wav = ["general_audio_native/wav"]
+native_mp3 = ["general_audio_native/mp3"]
 web = ["general_audio_web"]
 native_force_dedicated_audio_thread = ["general_audio_native/force_dedicated_audio_thread"]
 
