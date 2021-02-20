@@ -1,5 +1,5 @@
 # General Audio
 
-[![Travis-CI Status](https://travis-ci.org/stevebob/general-audio.svg?branch=master)](https://travis-ci.org/stevebob/general-audio)
+[![test](https://github.com/stevebob/general-audio/actions/workflows/test.yml/badge.svg)](https://github.com/stevebob/general-audio/actions/workflows/test.yml)
 
 Interfaces to audio playback, with several implementations.
