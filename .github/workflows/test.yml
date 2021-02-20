@@ -1,0 +1,27 @@
+name: test
+on: [push]
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+        rust: [stable]
+    steps:
+    - uses: hecrj/setup-rust-action@v1
+      with:
+        rust-version: ${{ matrix.rust }}
+    - if: matrix.os == 'ubuntu-latest'
+      run: |
+          sudo apt update
+          sudo apt install libasound2-dev
+    - uses: actions/checkout@master
+    - if: matrix.os != 'windows-latest'
+      run: ./test.sh
+    - if: matrix.os == 'windows-latest'
+      run: |
+        cargo test --manifest-path audio/Cargo.toml --all-features
+        cargo test --manifest-path native/Cargo.toml --all-features
+        cargo test --manifest-path static/Cargo.toml
+        cargo test --manifest-path static/Cargo.toml --features general_audio_native
+
