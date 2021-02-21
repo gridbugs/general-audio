@@ -1,7 +1,7 @@
 [package]
 name = "general_audio_native"
 description = "Implementation of general_audio::AudioPlayer for native applications"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Stephen Sherratt <stephen@sherra.tt>"]
 license = "MIT"
 readme = "README.md"
