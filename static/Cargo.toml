@@ -21,5 +21,5 @@ native_force_dedicated_audio_thread = ["general_audio_native/force_dedicated_aud
 
 [dependencies]
 general_audio = { path = "../audio", version = "0.1" }
-general_audio_native = { path = "../native", version = "0.2", optional = true }
+general_audio_native = { path = "../native", version = "0.3", optional = true }
 general_audio_web = { path = "../web", version = "0.1", optional = true }
