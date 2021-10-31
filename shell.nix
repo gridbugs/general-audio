@@ -13,7 +13,7 @@ let
   # This overlay is mozilla/nixpkgs-mozilla with the patch applied from this PR:
   # https://github.com/mozilla/nixpkgs-mozilla/pull/250
   # ...which replaces deprecated usage of stdenv.lib with lib.
-  moz_overlay_url = "https://github.com/gridbugs/nixpkgs-mozilla/archive/with-stdenv.lib-fix.tar.gz";
+  moz_overlay_url = "https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz";
   moz_overlay = import (builtins.fetchTarball moz_overlay_url);
   nixpkgs = import <nixpkgs> {
     overlays = [ moz_overlay ];
@@ -39,7 +39,4 @@ stdenv.mkDerivation rec {
 
   # Enable backtraces on panics
   RUST_BACKTRACE = 1;
-
-  # Without this graphical frontends can't find the GPU adapters
-  LD_LIBRARY_PATH = "${lib.makeLibraryPath buildInputs}";
 }
