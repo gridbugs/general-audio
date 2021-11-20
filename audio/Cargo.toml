@@ -8,6 +8,6 @@ readme = "README.md"
 homepage = "https://github.com/gridbugs/general-audio.git"
 repository = "https://github.com/gridbugs/general-audio.git"
 documentation = "https://docs.rs/general_audio"
-edition = "2018"
+edition = "2021"
 
 [dependencies]

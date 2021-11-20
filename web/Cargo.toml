@@ -8,7 +8,7 @@ readme = "README.md"
 homepage = "https://github.com/gridbugs/general-audio.git"
 repository = "https://github.com/gridbugs/general-audio.git"
 documentation = "https://docs.rs/general_audio_web"
-edition = "2018"
+edition = "2021"
 
 [dependencies]
 general_audio = { path = "../audio", version = "0.1" }
