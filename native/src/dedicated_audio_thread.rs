@@ -2,7 +2,7 @@
 // when also using winit to create windows.
 // More info: https://github.com/RustAudio/cpal/pull/348
 
-use crate::{output_stream_handle, play_bytes, play_bytes_loop, Error};
+use crate::Error;
 use rodio::Sink;
 use std::sync::mpsc;
 use std::thread;
@@ -27,7 +27,9 @@ impl NativeAudioPlayer {
         let (send_response, recv_response) = mpsc::channel();
         let (send_init, recv_init) = mpsc::channel();
         let _audio_thread = thread::spawn(move || {
-            if let Some((_output_stream, output_stream_handle)) = output_stream_handle() {
+            if let Some((_output_stream, output_stream_handle)) =
+                crate::common::output_stream_handle()
+            {
                 send_init.send(Ok(())).unwrap();
                 for PlayBytes {
                     bytes,
@@ -35,9 +37,9 @@ impl NativeAudioPlayer {
                 } in recv_request
                 {
                     let handle = if loop_forever {
-                        play_bytes_loop(&output_stream_handle, bytes)
+                        crate::common::play_bytes_loop(&output_stream_handle, bytes)
                     } else {
-                        play_bytes(&output_stream_handle, bytes)
+                        crate::common::play_bytes(&output_stream_handle, bytes)
                     };
                     send_response.send(handle).expect("failed to send response");
                 }
