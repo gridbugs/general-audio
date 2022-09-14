@@ -19,5 +19,5 @@ mp3 = ["rodio/mp3"]
 
 [dependencies]
 log = "0.4"
-rodio = { version = "0.15", default-features = false }
+rodio = { version = "0.16", default-features = false }
 general_audio = { path = "../audio", version = "0.1" }
